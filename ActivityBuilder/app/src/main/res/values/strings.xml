@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Activity Builder</string>
+    <string name="no_activities">No activities have been created yet.</string>
 </resources>
