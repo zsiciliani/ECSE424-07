@@ -2,6 +2,7 @@ package com.example.activitybuilder;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -15,5 +16,9 @@ public class CreateEvent extends AppCompatActivity {
 
     public void finish(View view) {
         this.finish();
+    }
+
+    public void createStop(View view) {
+        startActivity(new Intent(CreateEvent.this, CreateStop.class));
     }
 }
