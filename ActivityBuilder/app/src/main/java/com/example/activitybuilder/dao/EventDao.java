@@ -33,4 +33,7 @@ public interface EventDao {
 
     @Delete
     void delete(Event event);
+
+    @Query("DELETE FROM Event WHERE eventId = :id")
+    public void deleteEventById(int id);
 }

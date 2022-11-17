@@ -2,7 +2,7 @@ package com.example.activitybuilder.dao;
 
 import com.example.activitybuilder.model.Stop;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -14,10 +14,17 @@ import androidx.room.Update;
 public interface StopDao {
 
     @Query("SELECT * FROM Stop")
-    List<Stop> getAllStops();
+    ArrayList<Stop> getAllStops();
 
     @Query("SELECT * FROM Stop WHERE stopId = :id")
     Stop findStopById(int id);
+
+    /** Returns a list of Stops for an Event sorted by orderNumber from 1 to n */
+    @Query("SELECT * FROM Stop WHERE stopEventId = :eventId ORDER BY orderNumber ASC")
+    ArrayList<Stop> findStopsByEventId(int eventId);
+
+    @Query("SELECT * FROM Stop WHERE stopEventId = :eventId AND orderNumber = :orderNumber")
+    Stop findStopByEventIdAndOrderNumber(int eventId, int orderNumber);
 
     @Insert
     public void insertStop(Stop stop);

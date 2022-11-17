@@ -1,6 +1,7 @@
 package com.example.activitybuilder.model;
 
 //Trying to follow the example for one-to-many relationship from here https://developer.android.com/training/data-storage/room/relationships
+//Hopefully not using this class anymore and replacing it with the ForeignKey in Stop - still trying to figure out relationships
 
 import java.util.List;
 
