@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Manage Existing Projects"
-        android:onClick="manageEvent"
+        android:onClick="manageEvents"
         app:backgroundTint="#92105083"
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="parent"

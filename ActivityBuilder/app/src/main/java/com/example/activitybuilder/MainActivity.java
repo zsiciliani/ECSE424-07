@@ -15,10 +15,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void manageEvent(View view) {
-        startActivity(new Intent(MainActivity.this, ManageEvents.class));
-    }
-
     public void help(View view) {
         startActivity(new Intent(MainActivity.this, Help.class));
     }
@@ -31,5 +27,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, CreateEvent.class));
     }
 
-
+    public void manageEvents(View view) {
+        startActivity(new Intent(MainActivity.this, ManageEvents.class));
+    }
 }

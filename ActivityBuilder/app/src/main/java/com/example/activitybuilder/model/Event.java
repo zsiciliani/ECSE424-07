@@ -6,6 +6,7 @@ import com.example.activitybuilder.AppDatabase;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -122,6 +123,10 @@ public class Event {
 
     public static Event getEventById(Context context, int eventId) {
         return AppDatabase.getInstance(context).eventDao().findEventById(eventId);
+    }
+
+    public static List<Event> getAllEvents(Context context) {
+        return AppDatabase.getInstance(context).eventDao().getAllEvents();
     }
 
 }
