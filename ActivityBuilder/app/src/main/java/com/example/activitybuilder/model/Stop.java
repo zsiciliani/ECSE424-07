@@ -94,12 +94,8 @@ public class Stop {
         Stop stop = new Stop(stopEventId, contentUrl, description);
         AppDatabase db = AppDatabase.getInstance(context);
         boolean isEventOrdered = db.eventDao().findEventById(stopEventId).isOrdered();
-        if (isEventOrdered) {
-            int numStops = db.stopDao().findStopsByEventId(stopEventId).size();
-            stop.orderNumber = numStops + 1;
-        } else {
-            stop.orderNumber = -1;
-        }
+        int numStops = db.stopDao().findStopsByEventId(stopEventId).size();
+        stop.orderNumber = numStops + 1;
         AppDatabase.getInstance(context).stopDao().insertStop(stop);
         return stop;
     }
