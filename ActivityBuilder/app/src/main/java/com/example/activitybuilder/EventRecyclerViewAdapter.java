@@ -6,18 +6,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.activitybuilder.model.Event;
+
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class EventRecyclerViewAdapter extends RecyclerView.Adapter<EventRecyclerViewAdapter.ViewHolder> {
-    private List<String> mData;
+    private List<Event> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    EventRecyclerViewAdapter(Context context, List<String> data) {
+    EventRecyclerViewAdapter(Context context, List<Event> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -32,8 +34,8 @@ public class EventRecyclerViewAdapter extends RecyclerView.Adapter<EventRecycler
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String animal = mData.get(position);
-        holder.myTextView.setText(animal);
+        String eventName = mData.get(position).getName();
+        holder.myTextView.setText(eventName);
     }
 
     // total number of rows
@@ -60,7 +62,7 @@ public class EventRecyclerViewAdapter extends RecyclerView.Adapter<EventRecycler
     }
 
     // convenience method for getting data at click position
-    String getItem(int id) {
+    Event getItem(int id) {
         return mData.get(id);
     }
 

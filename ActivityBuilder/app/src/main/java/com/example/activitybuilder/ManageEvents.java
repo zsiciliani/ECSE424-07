@@ -6,9 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.activitybuilder.model.Event;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class ManageEvents extends AppCompatActivity implements EventRecyclerViewAdapter.ItemClickListener {
 
@@ -19,27 +23,19 @@ public class ManageEvents extends AppCompatActivity implements EventRecyclerView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_events);
 
-        ArrayList<String> eventNames = new ArrayList<>();
-        eventNames.add("Event 1");
-        eventNames.add("Event 2");
-        eventNames.add("Event 3");
-        eventNames.add("Event 4");
-        eventNames.add("Event 5");
-        eventNames.add("Event 1");
-        eventNames.add("Event 2");
-        eventNames.add("Event 3");
-        eventNames.add("Event 4");
-        eventNames.add("Event 5");
-        eventNames.add("Event 1");
-        eventNames.add("Event 2");
-        eventNames.add("Event 3");
-        eventNames.add("Event 4");
-        eventNames.add("Event 5");
+        List<Event> allEvents = Event.getAllEvents(getApplicationContext());
+
+        TextView tvNoActivities = (TextView) findViewById(R.id.tvNoActivities);
+        if (allEvents.size() == 0) {
+            tvNoActivities.setVisibility(View.VISIBLE);
+        } else {
+            tvNoActivities.setVisibility(View.INVISIBLE);
+        }
 
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvEvents);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new EventRecyclerViewAdapter(this, eventNames);
+        adapter = new EventRecyclerViewAdapter(this, allEvents);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
     }

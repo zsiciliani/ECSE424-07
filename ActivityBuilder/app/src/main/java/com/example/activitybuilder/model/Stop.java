@@ -129,6 +129,10 @@ public class Stop {
         db.stopDao().updateStops(stop, neighbourStop);
     }
 
+    public static List<Stop> getStopsByEventId(Context context, int eventId) {
+        return AppDatabase.getInstance(context).stopDao().findStopsByEventId(eventId);
+    }
+
     public static void deleteStop(Context context, Stop stop) {
         AppDatabase db = AppDatabase.getInstance(context);
         int stopOrderNumber = stop.orderNumber;
