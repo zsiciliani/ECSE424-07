@@ -21,6 +21,7 @@
         <entry key="app/src/main/res/layout/create_stop.xml" value="0.246875" />
         <entry key="app/src/main/res/layout/createevent.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/createstop.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/event_row.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/help.xml" value="0.20878623188405798" />
         <entry key="app/src/main/res/layout/manage_events.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/pair_nfc_tag.xml" value="0.2078125" />

@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:fontFamily="@font/italiana"
+        android:fontFamily="sans-serif-condensed"
         android:text="Manage Stops"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"

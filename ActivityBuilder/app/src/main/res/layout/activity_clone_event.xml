@@ -26,6 +26,7 @@
         android:id="@+id/textView4"
         android:layout_width="319dp"
         android:layout_height="71dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="Select Event to Clone"
         android:textAlignment="center"
         android:textSize="30sp"
