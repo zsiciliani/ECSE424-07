@@ -104,6 +104,10 @@ public class Stop {
         return stop;
     }
 
+    public static void updateStop(Context context, Stop stop) {
+        AppDatabase.getInstance(context).stopDao().updateStop(stop);
+    }
+
     /**
      * Reorder a stop by one position. Will change the orderNumber of the given Stop as well as that
      * of the neighbouring Stop it is being switched with
