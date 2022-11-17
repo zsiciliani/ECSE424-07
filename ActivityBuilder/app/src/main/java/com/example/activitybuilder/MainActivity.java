@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -17,4 +18,18 @@ public class MainActivity extends AppCompatActivity {
     public void createEvent(View view) {
         startActivity(new Intent(MainActivity.this, CreateEvent.class));
     }
+
+    public void help(View view) {
+        startActivity(new Intent(MainActivity.this, Help.class));
+    }
+
+    public void cloneEvent(View view) {
+        startActivity(new Intent(MainActivity.this, CloneEvent.class));
+    }
+
+    public void createStop(View view) {
+        startActivity(new Intent(MainActivity.this, CreateStop.class));
+    }
+
+
 }

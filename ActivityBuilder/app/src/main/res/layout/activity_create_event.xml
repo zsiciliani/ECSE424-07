@@ -10,6 +10,7 @@
         android:layout_width="62dp"
         android:layout_height="41dp"
         android:text="back"
+        android:onClick="finish"
         android:textSize="10sp"
         android:textStyle="bold"
         app:backgroundTint="#92105083"
