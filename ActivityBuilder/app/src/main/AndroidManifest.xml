@@ -12,6 +12,30 @@
         android:theme="@style/Theme.ActivityBuilder">
         <activity android:name=".ManageEvents"></activity>
         <activity
+            android:name=".ManageStops"
+            android:exported="false" />
+        <activity
+            android:name=".UnsuccessfulPair"
+            android:exported="false" />
+        <activity
+            android:name=".SuccessfulPair"
+            android:exported="false" />
+        <activity
+            android:name=".ManageEvents"
+            android:exported="false" />
+        <activity
+            android:name=".PairNfcTag"
+            android:exported="false" />
+        <activity
+            android:name=".CreateStop"
+            android:exported="false" />
+        <activity
+            android:name=".CloneEvent"
+            android:exported="false" />
+        <activity
+            android:name=".Help"
+            android:exported="false" />
+        <activity
             android:name=".CreateEvent"
             android:exported="false" />
         <activity android:name=".MainActivity">

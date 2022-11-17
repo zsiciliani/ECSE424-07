@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -26,6 +27,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="Create New Project"
+        android:onClick="createEvent"
         app:backgroundTint="#92105083"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,6 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Clone from Existing"
+        android:onClick="cloneEvent"
         app:backgroundTint="#92105083"
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Help"
+        android:onClick="help"
         app:backgroundTint="#92105083"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

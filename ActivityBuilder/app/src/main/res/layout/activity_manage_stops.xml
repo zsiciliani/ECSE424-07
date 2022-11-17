@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ManageEvents">
+    tools:context=".ManageStops">
 
     <Button
         android:id="@+id/button14"
@@ -19,46 +19,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.90999997" />
+        app:layout_constraintVertical_bias="0.93" />
 
     <TextView
         android:id="@+id/manageEventsHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/italiana"
-        android:text="Manage Events"
+        android:text="Manage Stops"
         android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.100000024" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/noActivitiesTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/italiana"
-        android:text="@string/no_activities"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/manageEventsHeader"
-        app:layout_constraintVertical_bias="0.100000024" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvEvents"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="50dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:fontFamily="@font/italiana"
+        android:text="@string/no_stops"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/manageEventsHeader" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

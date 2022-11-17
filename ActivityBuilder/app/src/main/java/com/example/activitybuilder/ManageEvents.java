@@ -48,4 +48,8 @@ public class ManageEvents extends AppCompatActivity implements EventRecyclerView
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
     }
+
+    public void finish(View view) {
+        this.finish();
+    }
 }
