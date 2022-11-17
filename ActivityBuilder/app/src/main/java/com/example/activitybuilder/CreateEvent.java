@@ -5,16 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.activitybuilder.model.Event;
 
-public class CreateEvent extends AppCompatActivity {
+import java.text.BreakIterator;
 
+public class CreateEvent extends AppCompatActivity {
+    public EditText editText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
+
     }
 
     public void finish(View view) {
