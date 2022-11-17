@@ -8,7 +8,7 @@ import java.util.Date;
 
 //TODO now that I'm adding a database I'm not sure if this class is necessary anymore
 public class ActivityBuilderApplication extends Application {
-    public Event createEvent(String name, Date date, int duration, String startingLocation, String description) {
+    public Event createEvent(String name, String date, int duration, String startingLocation, String description) {
         Event event = new Event();
         event.setName(name);
         event.setDate(date);

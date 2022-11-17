@@ -32,11 +32,6 @@ public class Stop {
 
     private boolean isPaired;
 
-    public Stop(int stopEventId, String contentUrl) {
-        this.stopEventId = stopEventId;
-        this.contentUrl = contentUrl;
-    }
-
     public Stop(int stopEventId, String contentUrl, String description) {
         this.stopEventId = stopEventId;
         this.contentUrl = contentUrl;
@@ -137,7 +132,7 @@ public class Stop {
 
         //All stops later in the order than the deleted stop will need to have their order decreased
         //by one to make the order continuous
-        ArrayList<Stop> otherStops = db.stopDao().getAllStops();
+        List<Stop> otherStops = db.stopDao().getAllStops();
         for (Stop s : otherStops) {
             if (s.orderNumber > stopOrderNumber) {
                 s.orderNumber --;

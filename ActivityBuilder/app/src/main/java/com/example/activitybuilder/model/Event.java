@@ -16,7 +16,7 @@ public class Event {
     public int eventId;
 
     private String name;
-    private Date date;
+    private String date;
     private int duration;
     private String startingLocation;
     private String description;
@@ -30,7 +30,7 @@ public class Event {
 
     public Event() {}
 
-    public Event(String name, Date date, int duration, String startingLocation, String description) {
+    public Event(String name, String date, int duration, String startingLocation, String description) {
         this.name = name;
         this.date = date;
         this.duration = duration;
@@ -46,11 +46,11 @@ public class Event {
         this.name = name;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -106,7 +106,7 @@ public class Event {
     //////////////////////Start of Business Logic/////////////////////////
     //////////////////////////////////////////////////////////////////////
 
-    public static Event createEvent(Context context, String name, Date date, int duration, String startingLocation, String description) {
+    public static Event createEvent(Context context, String name, String date, int duration, String startingLocation, String description) {
         Event event = new Event(name, date, duration, startingLocation, description);
         AppDatabase.getInstance(context).eventDao().insertEvent(event);
         return event;

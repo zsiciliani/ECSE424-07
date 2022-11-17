@@ -3,7 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/activity_clone_event.xml" value="0.25833333333333336" />
+        <entry key="app/src/main/res/layout/activity_create_event.xml" value="0.25833333333333336" />
+        <entry key="app/src/main/res/layout/activity_create_stop.xml" value="0.25833333333333336" />
+        <entry key="app/src/main/res/layout/activity_help.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_manage_events.xml" value="0.25833333333333336" />
+        <entry key="app/src/main/res/layout/activity_pair_nfc_tag.xml" value="0.25833333333333336" />
+        <entry key="app/src/main/res/layout/activity_successful_pair.xml" value="0.25833333333333336" />
+        <entry key="app/src/main/res/layout/activity_unsuccessful_pair.xml" value="0.25833333333333336" />
+        <entry key="app/src/main/res/layout/content_create_event.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/create_event2.xml" value="0.21770833333333334" />
         <entry key="app/src/main/res/layout/createevent.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/createstop.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/help.xml" value="0.20878623188405798" />
