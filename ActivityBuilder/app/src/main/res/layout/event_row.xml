@@ -18,13 +18,16 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10px"
         android:text="Clone"
-        android:textSize="16sp"/>
+        android:textSize="10dp"/>
     <Button
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="50dp"
+        android:layout_gravity="center"
         android:text="Delete"
-        android:textSize="16sp"/>
+        android:textSize="10dp"/>
 
 </LinearLayout>
