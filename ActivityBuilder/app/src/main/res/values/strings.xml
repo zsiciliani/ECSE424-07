@@ -2,6 +2,7 @@
     <string name="app_name">Activity Builder</string>
     <string name="no_activities">No activities have been created yet.</string>
     <string name="no_events">No events have been created yet.</string>
+    <string name="no_stops">No stops have been created yet.</string>
     <string name="title_activity_create_event">CreateEvent</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ActivityBuilder">
         <activity
+            android:name=".ManageStops"
+            android:exported="false" />
+        <activity
             android:name=".UnsuccessfulPair"
             android:exported="false" />
         <activity

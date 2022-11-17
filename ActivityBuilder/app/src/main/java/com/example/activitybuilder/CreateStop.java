@@ -18,6 +18,10 @@ public class CreateStop extends AppCompatActivity {
         this.finish();
     }
 
+    public void delete(View view) {
+        startActivity(new Intent(CreateStop.this, ManageStops.class));
+    }
+
     public void pairNFC(View view) {
         startActivity(new Intent(CreateStop.this, PairNfcTag.class));
     }

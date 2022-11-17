@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/layout/activity_help.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_manage_events.xml" value="0.25833333333333336" />
+        <entry key="app/src/main/res/layout/activity_manage_stops.xml" value="0.28802083333333334" />
         <entry key="app/src/main/res/layout/activity_pair_nfc_tag.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layout/activity_successful_pair.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layout/activity_unsuccessful_pair.xml" value="0.25833333333333336" />
