@@ -18,14 +18,14 @@ public interface StopDao {
     List<Stop> getAllStops();
 
     @Query("SELECT * FROM Stop WHERE stopId = :id")
-    Stop findStopById(int id);
+    Stop findStopById(long id);
 
     /** Returns a list of Stops for an Event sorted by orderNumber from 1 to n */
     @Query("SELECT * FROM Stop WHERE stopEventId = :eventId ORDER BY orderNumber ASC")
-    List<Stop> findStopsByEventId(int eventId);
+    List<Stop> findStopsByEventId(long eventId);
 
     @Query("SELECT * FROM Stop WHERE stopEventId = :eventId AND orderNumber = :orderNumber")
-    Stop findStopByEventIdAndOrderNumber(int eventId, int orderNumber);
+    Stop findStopByEventIdAndOrderNumber(long eventId, int orderNumber);
 
     @Insert
     public void insertStop(Stop stop);

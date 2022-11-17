@@ -13,8 +13,9 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Event {
+
     @PrimaryKey(autoGenerate = true)
-    public int eventId;
+    public long eventId;
 
     private String name;
     private String date;
@@ -79,11 +80,11 @@ public class Event {
         this.description = description;
     }
 
-    public int getEventId() {
+    public long getEventId() {
         return eventId;
     }
 
-    public void setEventId(int eventId) {
+    public void setEventId(long eventId) {
         this.eventId = eventId;
     }
 
@@ -109,19 +110,20 @@ public class Event {
 
     public static Event createEvent(Context context, String name, String date, int duration, String startingLocation, String description) {
         Event event = new Event(name, date, duration, startingLocation, description);
-        AppDatabase.getInstance(context).eventDao().insertEvent(event);
+        long id = AppDatabase.getInstance(context).eventDao().insertEvent(event);
+        event.eventId = id;
         System.out.println("Event Id is " + event.eventId);
         return event;
     }
 
-    public static void deleteEventById(Context context, int eventId) {
+    public static void deleteEventById(Context context, long eventId) {
         AppDatabase.getInstance(context).eventDao().deleteEventById(eventId);
         //Note: I think that because of the foreign key being set to CASCADE, deleting an Event should
         //delete all related stops. Might need to do some testing to make sure this is what is
         //actually happening. If not, will need to do some manual deletion here
     }
 
-    public static Event getEventById(Context context, int eventId) {
+    public static Event getEventById(Context context, long eventId) {
         return AppDatabase.getInstance(context).eventDao().findEventById(eventId);
     }
 

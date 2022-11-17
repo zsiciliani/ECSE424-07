@@ -18,8 +18,8 @@ import androidx.room.PrimaryKey;
 public class Stop {
 
     @PrimaryKey(autoGenerate = true)
-    private int stopId;
-    private int stopEventId;
+    private long stopId;
+    private long stopEventId;
 
     /**
      * The order of the stop within the Event. Starts at 1. If the event is unordered, all stops
@@ -31,13 +31,13 @@ public class Stop {
 
     private boolean isPaired;
 
-    public Stop(int stopEventId, String contentUrl, String location) {
+    public Stop(long stopEventId, String contentUrl, String location) {
         this.stopEventId = stopEventId;
         this.contentUrl = contentUrl;
         this.location = location;
     }
 
-    public int getStopId() {
+    public long getStopId() {
         return stopId;
     }
 
@@ -53,11 +53,11 @@ public class Stop {
         this.orderNumber = orderNumber;
     }
 
-    public int getStopEventId() {
+    public long getStopEventId() {
         return stopEventId;
     }
 
-    public void setStopEventId(int stopEventId) {
+    public void setStopEventId(long stopEventId) {
         this.stopEventId = stopEventId;
     }
 
@@ -89,10 +89,11 @@ public class Stop {
     /**
      * Create a stop. This is the method to call from the UI
      */
-    public static Stop createStop(Context context, int stopEventId, String contentUrl, String location) {
+    public static Stop createStop(Context context, long stopEventId, String contentUrl, String location) {
         Stop stop = new Stop(stopEventId, contentUrl, location);
         AppDatabase db = AppDatabase.getInstance(context);
-        boolean isEventOrdered = db.eventDao().findEventById(stopEventId).isOrdered();
+        System.out.println("stopEventId is " + stopEventId);
+        System.out.println("Event is " + db.eventDao().findEventById(stopEventId));
         int numStops = db.stopDao().findStopsByEventId(stopEventId).size();
         stop.orderNumber = numStops + 1;
         AppDatabase.getInstance(context).stopDao().insertStop(stop);
@@ -124,7 +125,7 @@ public class Stop {
         db.stopDao().updateStops(stop, neighbourStop);
     }
 
-    public static List<Stop> getStopsByEventId(Context context, int eventId) {
+    public static List<Stop> getStopsByEventId(Context context, long eventId) {
         return AppDatabase.getInstance(context).stopDao().findStopsByEventId(eventId);
     }
 
