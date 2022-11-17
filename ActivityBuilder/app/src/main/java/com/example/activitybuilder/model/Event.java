@@ -1,9 +1,16 @@
-package com.example.activitybuilder;
+package com.example.activitybuilder.model;
 
 import java.util.ArrayList;
 import java.util.Date;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Event {
+    @PrimaryKey(autoGenerate = true)
+    public int eventId;
+
     private String name;
     private Date date;
     private int duration;
@@ -11,7 +18,6 @@ public class Event {
     private String description;
     private ArrayList<Stop> stops;
     private int numStops;
-    private int id;
 
     public Event() {}
 
@@ -61,14 +67,6 @@ public class Event {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     /**
