@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -42,7 +43,9 @@ public class ManageEvents extends AppCompatActivity implements EventRecyclerView
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(ManageEvents.this, EditEvent.class);
+        intent.putExtra("event_id", adapter.getItem(position).getEventId());
+        startActivity(intent);
     }
 
     public void finish(View view) {

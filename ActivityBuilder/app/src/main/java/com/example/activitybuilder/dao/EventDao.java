@@ -17,10 +17,10 @@ public interface EventDao {
     public List<Event> getAllEvents();
 
     @Query("SELECT * FROM Event WHERE eventId = :id")
-    public Event findEventById(int id);
+    public Event findEventById(long id);
 
     @Insert
-    public void insertEvent(Event event);
+    public long insertEvent(Event event);
 
     @Insert
     public void insertEvents(Event... events);
@@ -35,5 +35,5 @@ public interface EventDao {
     void delete(Event event);
 
     @Query("DELETE FROM Event WHERE eventId = :id")
-    public void deleteEventById(int id);
+    public void deleteEventById(long id);
 }

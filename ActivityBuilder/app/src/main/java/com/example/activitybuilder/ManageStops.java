@@ -16,7 +16,7 @@ import com.example.activitybuilder.model.Stop;
 import java.util.List;
 
 public class ManageStops extends AppCompatActivity implements StopRecyclerViewAdapter.ItemClickListener {
-    int eventId;
+    long eventId;
     StopRecyclerViewAdapter adapter;
 
     @Override
@@ -46,7 +46,10 @@ public class ManageStops extends AppCompatActivity implements StopRecyclerViewAd
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(ManageStops.this, EditStop.class);
+        intent.putExtra("event_id", adapter.getItem(position).getStopId());
+        startActivity(intent);
     }
 
     public void finish(View view) {

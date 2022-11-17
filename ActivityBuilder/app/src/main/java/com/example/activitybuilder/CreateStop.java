@@ -10,14 +10,14 @@ import android.widget.TextView;
 import com.example.activitybuilder.model.Stop;
 
 public class CreateStop extends AppCompatActivity {
-    int id;
+    long eventId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_stop);
 
         Intent intent = getIntent();
-        id = intent.getIntExtra("event_id", 0);
+        eventId = intent.getIntExtra("event_id", 0);
     }
 
     public void finish(View view) {
@@ -31,6 +31,10 @@ public class CreateStop extends AppCompatActivity {
     public void save(View view){
         String location = ((TextView) this.findViewById(R.id.locationField)).getText().toString();
         String content = ((TextView) this.findViewById(R.id.contentField)).getText().toString();
-        Stop stop = Stop.createStop(getApplicationContext(),id,content,location);
+        Stop stop = Stop.createStop(getApplicationContext(),eventId,content,location);
+
+        Intent intent = new Intent(CreateStop.this, ManageStops.class);
+        intent.putExtra("event_id", eventId);
+        startActivity(intent);
     }
 }
