@@ -11,7 +11,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Event.class, Stop.class}, version = 1)
+@Database(entities = {Event.class, Stop.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract EventDao eventDao();
     public abstract StopDao stopDao();
@@ -22,7 +22,7 @@ public abstract class AppDatabase extends RoomDatabase {
         if(INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "App_Database").allowMainThreadQueries().build();
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "App_Database").allowMainThreadQueries().fallbackToDestructiveMigration().build();
                 }
             }
         }

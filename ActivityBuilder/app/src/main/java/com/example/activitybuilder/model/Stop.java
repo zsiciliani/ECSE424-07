@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.example.activitybuilder.AppDatabase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.room.Entity;
@@ -28,14 +27,14 @@ public class Stop {
      */
     private int orderNumber;
     private String contentUrl;
-    private String description;
+    private String location;
 
     private boolean isPaired;
 
-    public Stop(int stopEventId, String contentUrl, String description) {
+    public Stop(int stopEventId, String contentUrl, String location) {
         this.stopEventId = stopEventId;
         this.contentUrl = contentUrl;
-        this.description = description;
+        this.location = location;
     }
 
     public int getStopId() {
@@ -70,12 +69,12 @@ public class Stop {
         this.contentUrl = contentUrl;
     }
 
-    public String getDescription() {
-        return description;
+    public String getLocation() {
+        return location;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
 
@@ -90,8 +89,8 @@ public class Stop {
     /**
      * Create a stop. This is the method to call from the UI
      */
-    public static Stop createStop(Context context, int stopEventId, String contentUrl, String description) {
-        Stop stop = new Stop(stopEventId, contentUrl, description);
+    public static Stop createStop(Context context, int stopEventId, String contentUrl, String location) {
+        Stop stop = new Stop(stopEventId, contentUrl, location);
         AppDatabase db = AppDatabase.getInstance(context);
         boolean isEventOrdered = db.eventDao().findEventById(stopEventId).isOrdered();
         int numStops = db.stopDao().findStopsByEventId(stopEventId).size();
