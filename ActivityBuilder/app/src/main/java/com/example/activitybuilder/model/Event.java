@@ -109,6 +109,7 @@ public class Event {
     public static Event createEvent(Context context, String name, String date, int duration, String startingLocation, String description) {
         Event event = new Event(name, date, duration, startingLocation, description);
         AppDatabase.getInstance(context).eventDao().insertEvent(event);
+        System.out.println("Event Id is " + event.eventId);
         return event;
     }
 
