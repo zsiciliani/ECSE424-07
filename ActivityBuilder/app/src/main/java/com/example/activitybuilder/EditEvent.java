@@ -8,24 +8,21 @@ import android.view.View;
 
 import com.example.activitybuilder.model.Event;
 
-public class CreateEvent extends AppCompatActivity {
+public class EditEvent extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_event);
+        setContentView(R.layout.activity_edit_event);
     }
 
     public void finish(View view) {
         this.finish();
     }
 
-    public void manageStops(View view) {
+    public void createStop(View view) {
         Event event = Event.createEvent(getApplicationContext(),"event1","01/20/10",12,"McConnell","description");
         System.out.println("Created event with ID " + event.getEventId());
-        Intent intent = new Intent(CreateEvent.this, ManageStops.class);
-        intent.putExtra("event_id", event.getEventId());
-        startActivity(intent);
+        startActivity(new Intent(EditEvent.this, CreateStop.class));
     }
-
 }

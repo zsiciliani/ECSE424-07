@@ -11,6 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ActivityBuilder">
         <activity
+            android:name=".EditEvent"
+            android:exported="false" />
+        <activity
+            android:name=".EditStop"
+            android:exported="false" />
+        <activity
             android:name=".ManageStops"
             android:exported="false" />
         <activity
