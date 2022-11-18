@@ -75,7 +75,7 @@ public class EditEvent extends AppCompatActivity {
         startActivity(new_intent);
     }
     public void createStop(View view) {
-        Intent new_intent = new Intent(EditEvent.this, CreateStop.class);
+        Intent new_intent = new Intent(EditEvent.this, ManageStops.class);
         new_intent.putExtra("event_id", eventId);
         startActivity(new_intent);
 
