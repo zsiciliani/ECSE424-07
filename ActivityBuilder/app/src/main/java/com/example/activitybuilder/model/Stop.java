@@ -8,11 +8,12 @@ import java.util.List;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(foreignKeys = {@ForeignKey(entity = Event.class,
-    parentColumns = "eventId",
-    childColumns = "stopEventId",
+@Entity(indices = {@Index(value = {"stopEventId"})}, foreignKeys = {@ForeignKey(entity = Event.class,
+    parentColumns = {"eventId"},
+    childColumns = {"stopEventId"},
     onDelete = ForeignKey.CASCADE)
 })
 public class Stop {
@@ -41,7 +42,7 @@ public class Stop {
         return stopId;
     }
 
-    public void setStopId(int stopId) {
+    public void setStopId(long stopId) {
         this.stopId = stopId;
     }
 
