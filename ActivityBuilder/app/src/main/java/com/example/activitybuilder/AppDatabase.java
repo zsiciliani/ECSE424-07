@@ -11,7 +11,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Event.class, Stop.class}, version = 3)
+@Database(entities = {Event.class, Stop.class}, version = 4)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract EventDao eventDao();
     public abstract StopDao stopDao();

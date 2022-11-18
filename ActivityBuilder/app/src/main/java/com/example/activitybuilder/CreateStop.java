@@ -17,7 +17,7 @@ public class CreateStop extends AppCompatActivity {
         setContentView(R.layout.activity_create_stop);
 
         Intent intent = getIntent();
-        eventId = intent.getIntExtra("event_id", 0);
+        eventId = intent.getLongExtra("event_id", 0);
     }
 
     public void finish(View view) {
@@ -31,6 +31,7 @@ public class CreateStop extends AppCompatActivity {
     public void save(View view){
         String location = ((TextView) this.findViewById(R.id.locationField)).getText().toString();
         String content = ((TextView) this.findViewById(R.id.contentField)).getText().toString();
+        System.out.println("About to create stop with eventId " + eventId);
         Stop stop = Stop.createStop(getApplicationContext(),eventId,content,location);
 
         Intent intent = new Intent(CreateStop.this, ManageStops.class);

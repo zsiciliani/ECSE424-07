@@ -63,7 +63,7 @@ public class EditEvent extends AppCompatActivity {
 
         System.out.println(eventId);
         Event event = Event.updateEvent(getApplicationContext(),eventId,eventName,date,duration,startingLocation,description);
-        System.out.println("Created event with ID " + event.getEventId());
+        System.out.println("Updated event with ID " + event.getEventId());
 
         Intent new_intent = new Intent(EditEvent.this, MainActivity.class);
         new_intent.putExtra("event_id", event.getEventId());
@@ -76,6 +76,7 @@ public class EditEvent extends AppCompatActivity {
     }
     public void createStop(View view) {
         Intent new_intent = new Intent(EditEvent.this, ManageStops.class);
+        System.out.println("About to manage stops for eventId " + eventId);
         new_intent.putExtra("event_id", eventId);
         startActivity(new_intent);
 
