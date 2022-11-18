@@ -78,4 +78,8 @@ public class EditStop extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    public void returnHome(View view) {
+        startActivity(new Intent(EditStop.this, MainActivity.class));
+    }
 }

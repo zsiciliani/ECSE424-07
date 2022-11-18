@@ -25,6 +25,10 @@ public class CreateStop extends AppCompatActivity {
         this.finish();
     }
 
+    public void returnHome(View view) {
+        startActivity(new Intent(CreateStop.this, MainActivity.class));
+    }
+
     public void pairNFC(View view) {
         EditText location_name = findViewById(R.id.locationField);
         String location = ((TextView) this.findViewById(R.id.locationField)).getText().toString();

@@ -66,4 +66,8 @@ public class ManageStops extends AppCompatActivity implements StopRecyclerViewAd
         startActivity(intent);
     }
 
+    public void returnHome(View view) {
+        startActivity(new Intent(ManageStops.this, MainActivity.class));
+    }
+
 }

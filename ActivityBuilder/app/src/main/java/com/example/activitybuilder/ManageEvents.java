@@ -58,4 +58,8 @@ public class ManageEvents extends AppCompatActivity implements EventRecyclerView
         this.finish();
     }
 
+    public void returnHome(View view) {
+        startActivity(new Intent(ManageEvents.this, MainActivity.class));
+    }
+
 }

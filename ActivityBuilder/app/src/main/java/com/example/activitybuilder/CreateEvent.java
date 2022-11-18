@@ -25,6 +25,10 @@ public class CreateEvent extends AppCompatActivity {
         this.finish();
     }
 
+    public void returnHome(View view) {
+        startActivity(new Intent(CreateEvent.this, MainActivity.class));
+    }
+
     public void manageStops(View view) {
 
         EditText event_name = findViewById(R.id.eventNameField);

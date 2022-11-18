@@ -107,4 +107,8 @@ public class EditEvent extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    public void returnHome(View view) {
+        startActivity(new Intent(EditEvent.this, MainActivity.class));
+    }
 }

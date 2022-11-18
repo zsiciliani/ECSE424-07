@@ -8,7 +8,7 @@
 
     <Button
         android:id="@+id/button14"
-        android:layout_width="62dp"
+        android:layout_width="70dp"
         android:layout_height="41dp"
         android:text="back"
         android:onClick="finish"
@@ -18,6 +18,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01999998" />
+
+    <Button
+        android:id="@+id/btnHomeFromCloneEvent"
+        android:layout_width="70dp"
+        android:layout_height="48dp"
+        android:onClick="finish"
+        android:text="Home"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:backgroundTint="#92105083"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.01999998" />

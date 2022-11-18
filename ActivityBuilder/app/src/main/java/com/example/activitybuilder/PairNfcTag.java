@@ -45,8 +45,6 @@ public class PairNfcTag extends AppCompatActivity {
     boolean writeMode;
     Tag myTag;
     Context context;
-    TextView edit_message;
-    TextView nfc_contents;
     Button ActivateButton;
 
     String stopContent;
@@ -62,9 +60,6 @@ public class PairNfcTag extends AppCompatActivity {
         stopContent = intent.getStringExtra("stop_content");
 
         System.out.println("Stop content is " + stopContent);
-
-        edit_message = (TextView) findViewById(R.id.edit_message);
-        nfc_contents = (TextView) findViewById(R.id.nfc_contents);
         ActivateButton = findViewById(R.id.ActivateButton);
         context = this;
         ActivateButton.setOnClickListener(new View.OnClickListener() {
@@ -133,8 +128,6 @@ public class PairNfcTag extends AppCompatActivity {
         } catch (UnsupportedEncodingException e) {
             Log.e("UnsupportedEncoding", e.toString());
         }
-
-        nfc_contents.setText("NFC Content: " + text);
     }
 
     private void write(String text, Tag tag) throws IOException, FormatException {
@@ -195,6 +188,14 @@ public class PairNfcTag extends AppCompatActivity {
     private void writeModeOff() {
         writeMode = false;
         nfcAdapter.disableForegroundDispatch(this);
+    }
+
+    public void finish(View view) {
+        this.finish();
+    }
+
+    public void returnHome(View view) {
+        startActivity(new Intent(PairNfcTag.this, MainActivity.class));
     }
 
 }
