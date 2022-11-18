@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.activitybuilder.model.Stop;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.Nullable;
@@ -48,10 +49,20 @@ public class PairNfcTag extends AppCompatActivity {
     TextView nfc_contents;
     Button ActivateButton;
 
+    String stopContent;
+    long stopId;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pair_nfc_tag);
+
+        Intent intent = getIntent();
+        stopId = intent.getLongExtra("stop_id", 0);
+        stopContent = intent.getStringExtra("stop_content");
+
+        System.out.println("Stop content is " + stopContent);
+
         edit_message = (TextView) findViewById(R.id.edit_message);
         nfc_contents = (TextView) findViewById(R.id.nfc_contents);
         ActivateButton = findViewById(R.id.ActivateButton);
@@ -63,8 +74,11 @@ public class PairNfcTag extends AppCompatActivity {
                     if (myTag == null) {
                         Toast.makeText(context, Error_Detected, Toast.LENGTH_SHORT).show();
                     } else {
-                        write("PlainText|" + edit_message.getText().toString(), myTag);
+                        System.out.println("Writing stop content " + stopContent);
+                        write(stopContent, myTag);
+                        Stop.setStopToPaired(getApplicationContext(), stopId);
                         Toast.makeText(context, Write_Success, Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(PairNfcTag.this, SuccessfulPair.class));
                     }
                 } catch (IOException e) {
                     Toast.makeText(context, Write_Error, Toast.LENGTH_SHORT).show();

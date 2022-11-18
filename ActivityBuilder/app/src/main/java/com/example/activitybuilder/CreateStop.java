@@ -26,13 +26,26 @@ public class CreateStop extends AppCompatActivity {
     }
 
     public void pairNFC(View view) {
-        startActivity(new Intent(CreateStop.this, PairNfcTag.class));
+        EditText location_name = findViewById(R.id.locationField);
+        String location = ((TextView) this.findViewById(R.id.locationField)).getText().toString();
+
+        if (location.length() == 0) {
+            location_name.setError("This field is required");
+        } else{
+            String content = ((TextView) this.findViewById(R.id.contentField)).getText().toString();
+            System.out.println("About to create stop with eventId " + eventId);
+            Stop stop = Stop.createStop(getApplicationContext(),eventId,content,location);
+
+            Intent intent = new Intent(CreateStop.this, PairNfcTag.class);
+            intent.putExtra("stop_id", stop.getStopId());
+            intent.putExtra("stop_content", stop.getContentUrl());
+            startActivity(intent);
+        }
     }
 
     public void save(View view){
         EditText location_name = findViewById(R.id.locationField);
         String location = ((TextView) this.findViewById(R.id.locationField)).getText().toString();
-
 
         if (location.length() == 0) {
             location_name.setError("This field is required");

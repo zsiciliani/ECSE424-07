@@ -19,6 +19,6 @@ public class SuccessfulPair extends AppCompatActivity {
     }
 
     public void okay(View view) {
-        startActivity(new Intent(SuccessfulPair.this, CreateStop.class));
+        startActivity(new Intent(SuccessfulPair.this, MainActivity.class));
     }
 }

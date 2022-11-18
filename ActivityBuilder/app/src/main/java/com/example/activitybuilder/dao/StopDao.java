@@ -28,7 +28,7 @@ public interface StopDao {
     Stop findStopByEventIdAndOrderNumber(long eventId, int orderNumber);
 
     @Insert
-    public void insertStop(Stop stop);
+    public long insertStop(Stop stop);
 
     @Insert
     public void insertStops(Stop... stops);
