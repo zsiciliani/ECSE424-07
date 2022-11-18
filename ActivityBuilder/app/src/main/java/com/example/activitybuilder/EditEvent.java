@@ -65,13 +65,13 @@ public class EditEvent extends AppCompatActivity {
         Event event = Event.updateEvent(getApplicationContext(),eventId,eventName,date,duration,startingLocation,description);
         System.out.println("Created event with ID " + event.getEventId());
 
-        Intent new_intent = new Intent(EditEvent.this, ManageStops.class);
-        intent.putExtra("event_id", event.getEventId());
-        intent.putExtra("event_name", event.getName());
-        intent.putExtra("event_SL", event.getStartingLocation());
-        intent.putExtra("event_duration", event.getDuration());
-        intent.putExtra("event_date", event.getDate());
-        intent.putExtra("event_description", event.getDescription());
+        Intent new_intent = new Intent(EditEvent.this, MainActivity.class);
+        new_intent.putExtra("event_id", event.getEventId());
+        new_intent.putExtra("event_name", event.getName());
+        new_intent.putExtra("event_SL", event.getStartingLocation());
+        new_intent.putExtra("event_duration", event.getDuration());
+        new_intent.putExtra("event_date", event.getDate());
+        new_intent.putExtra("event_description", event.getDescription());
         startActivity(new_intent);
     }
     public void createStop(View view) {

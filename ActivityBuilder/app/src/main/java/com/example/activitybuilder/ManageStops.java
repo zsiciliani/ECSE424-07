@@ -48,7 +48,8 @@ public class ManageStops extends AppCompatActivity implements StopRecyclerViewAd
     public void onItemClick(View view, int position) {
         //Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(ManageStops.this, EditStop.class);
-        intent.putExtra("event_id", adapter.getItem(position).getStopId());
+        intent.putExtra("stop_id", adapter.getItem(position).getStopId());
+        intent.putExtra("event_id", adapter.getItem(position).getStopEventId());
         startActivity(intent);
     }
 

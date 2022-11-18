@@ -129,6 +129,15 @@ public class Stop {
         return AppDatabase.getInstance(context).stopDao().findStopsByEventId(eventId);
     }
 
+    public static Stop updateStop(Context context, long stopId, long stopEventId, String contentUrl, String location) {
+        Stop stop = AppDatabase.getInstance(context).stopDao().findStopById(stopId);
+        stop.stopEventId = stopEventId;
+        stop.contentUrl = contentUrl;
+        stop.location = location;
+        AppDatabase.getInstance(context).stopDao().updateStop(stop);
+        return stop;
+    }
+
     public static void deleteStop(Context context, Stop stop) {
         AppDatabase db = AppDatabase.getInstance(context);
         int stopOrderNumber = stop.orderNumber;
