@@ -27,7 +27,7 @@
         android:id="@+id/button9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="finish"
+        android:onClick="save"
         android:text="Save"
         app:backgroundTint="#92105083"
         app:layout_constraintBottom_toBottomOf="parent"

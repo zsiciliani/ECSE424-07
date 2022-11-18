@@ -45,6 +45,12 @@ public class ManageEvents extends AppCompatActivity implements EventRecyclerView
     public void onItemClick(View view, int position) {
         Intent intent = new Intent(ManageEvents.this, EditEvent.class);
         intent.putExtra("event_id", adapter.getItem(position).getEventId());
+        intent.putExtra("event_name", adapter.getItem(position).getName());
+        intent.putExtra("event_SL", adapter.getItem(position).getStartingLocation());
+        intent.putExtra("event_duration", adapter.getItem(position).getDuration());
+        intent.putExtra("event_date", adapter.getItem(position).getDate());
+        intent.putExtra("event_description", adapter.getItem(position).getDescription());
+
         startActivity(intent);
     }
 
