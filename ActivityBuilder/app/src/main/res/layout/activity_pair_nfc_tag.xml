@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PairNfcTag">
+
     <Button
         android:id="@+id/button18"
         android:layout_width="62dp"
-        android:layout_height="41dp"
-        android:text="back"
+        android:layout_height="48dp"
         android:onClick="finish"
+        android:text="back"
         android:textSize="10sp"
         android:textStyle="bold"
         app:backgroundTint="#92105083"
