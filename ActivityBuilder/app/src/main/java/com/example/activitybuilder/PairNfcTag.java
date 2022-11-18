@@ -1,282 +1,186 @@
 package com.example.activitybuilder;
 
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.nfc.FormatException;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
+import android.nfc.NfcManager;
 import android.nfc.Tag;
 import android.nfc.tech.MifareClassic;
 import android.nfc.tech.MifareUltralight;
+import android.nfc.tech.Ndef;
+import android.nfc.tech.NdefFormatable;
+import android.nfc.tech.NfcA;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
-//Copyright (c) 2012-2020 Cawin Chan
-//
-//        Permission is hereby granted, free of charge, to any person obtaining
-//        a copy of this software and associated documentation files (the
-//        "Software"), to deal in the Software without restriction, including
-//        without limitation the rights to use, copy, modify, merge, publish,
-//        distribute, sublicense, and/or sell copies of the Software, and to
-//        permit persons to whom the Software is furnished to do so, subject to
-//        the following conditions:
-//
-//        The above copyright notice and this permission notice shall be
-//        included in all copies or substantial portions of the Software.
-//
-//        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-//        EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-//        MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-//        NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-//        LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-//        OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-//        WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 public class PairNfcTag extends AppCompatActivity {
-    //Intialize attributes
+
+    public static final String Error_Detected = "No NFC Tag Detected";
+    public static final String Write_Success = "Text Written Successfully";
+    public static final String Write_Error = "Error during writing, try again";
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
-
-    final static String TAG = "nfc_test";
+    IntentFilter writingTagFilters[];
+    boolean writeMode;
+    Tag myTag;
+    Context context;
+    TextView edit_message;
+    TextView nfc_contents;
+    Button ActivateButton;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_pair_nfc_tag);
+        edit_message = (TextView) findViewById(R.id.edit_message);
+        nfc_contents = (TextView) findViewById(R.id.nfc_contents);
+        ActivateButton = findViewById(R.id.ActivateButton);
+        context = this;
+        ActivateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    if (myTag == null) {
+                        Toast.makeText(context, Error_Detected, Toast.LENGTH_SHORT).show();
+                    } else {
+                        write("PlainText|" + edit_message.getText().toString(), myTag);
+                        Toast.makeText(context, Write_Success, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (IOException e) {
+                    Toast.makeText(context, Write_Error, Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                } catch (FormatException e) {
+                    Toast.makeText(context, Write_Error, Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        });
 
-        //Initialise NfcAdapter
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        //If no NfcAdapter, display that the device has no NFC
         if (nfcAdapter == null) {
-            Toast.makeText(this, "NO NFC Capabilities",
-                    Toast.LENGTH_SHORT).show();
-            finish();
+            Toast.makeText(context, "This device does not support NFC", Toast.LENGTH_SHORT).show();
+            //finish
         }
-        //Create a PendingIntent object so the Android system can
-        //populate it with the details of the tag when it is scanned.
-        //PendingIntent.getActivity(Context,requestcode(identifier for
-        //                           intent),intent,int)
-        pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, this.getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        readFromIntent(getIntent());
+        pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
+        tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
+        writingTagFilters = new IntentFilter[] { tagDetected };
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        assert nfcAdapter != null;
-        //nfcAdapter.enableForegroundDispatch(context,pendingIntent,
-        //                                    intentFilterArray,
-        //                                    techListsArray)
-        nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
+    private void readFromIntent(Intent intent) {
+        String action = intent.getAction();
+        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
+                || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
+                || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
+            Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+            NdefMessage[] msgs = null;
+            if (rawMsgs != null) {
+                msgs = new NdefMessage[rawMsgs.length];
+                for (int i = 0; i < rawMsgs.length; i ++) {
+                    msgs[i] = (NdefMessage) rawMsgs[i];
+                }
+            }
+            buildTagViews(msgs);
+        }
     }
 
-    protected void onPause() {
-        super.onPause();
-        //Onpause stop listening
-        if (nfcAdapter != null) {
-            nfcAdapter.disableForegroundDispatch(this);
+    private void buildTagViews(NdefMessage[] msgs) {
+        if (msgs == null || msgs.length == 0) return;
+
+        String text = "";
+
+        byte[] payload = msgs[0].getRecords()[0].getPayload();
+        String textEncoding = ((payload[0] & 128) == 0) ? "UTF-8" : "UTF-16";
+        int languageCodeLength = payload[0] & 0063;
+
+        try {
+            text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
+        } catch (UnsupportedEncodingException e) {
+            Log.e("UnsupportedEncoding", e.toString());
         }
+
+        nfc_contents.setText("NFC Content: " + text);
+    }
+
+    private void write(String text, Tag tag) throws IOException, FormatException {
+        NdefRecord[] records = { createRecord(text) };
+        NdefMessage message = new NdefMessage(records);
+
+        Ndef ndef = Ndef.get(tag);
+        ndef.connect();
+        ndef.writeNdefMessage(message);
+        ndef.close();
+    }
+
+    private NdefRecord createRecord(String text) throws UnsupportedEncodingException {
+        String lang = "en";
+        byte[] textBytes = text.getBytes();
+        byte[] langBytes = lang.getBytes("US-ASCII");
+        int langLength = langBytes.length;
+        int textLength = textBytes.length;
+        byte[] payload = new byte[1 + langLength + textLength];
+
+        payload[0] = (byte) langLength;
+
+        System.arraycopy(langBytes, 0, payload, 1, langLength);
+        System.arraycopy(textBytes, 0, payload, 1 + langLength, textLength);
+
+        NdefRecord recordNFC = new NdefRecord(NdefRecord.TNF_WELL_KNOWN, NdefRecord.RTD_TEXT, new byte[0], payload);
+
+        return recordNFC;
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        resolveIntent(intent);
-    }
-
-    private void resolveIntent(Intent intent) {
-        String action = intent.getAction();
-        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
-                || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
-                || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
-            Tag tag = (Tag) intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-            assert tag != null;
-            byte[] payload = detectTagData(tag).getBytes();
-
+        readFromIntent(intent);
+        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
+            myTag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         }
     }
-    //For detection
-    private String detectTagData(Tag tag) {
-        StringBuilder sb = new StringBuilder();
-        byte[] id = tag.getId();
-        sb.append("ID (hex): ").append(toHex(id)).append('\n');
-        sb.append("ID (reversed hex): ").append(toReversedHex(id)).append('\n');
-        sb.append("ID (dec): ").append(toDec(id)).append('\n');
-        sb.append("ID (reversed dec): ").append(toReversedDec(id)).append('\n');
 
-        String prefix = "android.nfc.tech.";
-        sb.append("Technologies: ");
-        for (String tech : tag.getTechList()) {
-            sb.append(tech.substring(prefix.length()));
-            sb.append(", ");
-        }
-
-        sb.delete(sb.length() - 2, sb.length());
-
-        for (String tech : tag.getTechList()) {
-
-            if (tech.equals(MifareClassic.class.getName())) {
-                sb.append('\n');
-                String type = "Unknown";
-
-                try {
-                    MifareClassic mifareTag = MifareClassic.get(tag);
-
-                    switch (mifareTag.getType()) {
-                        case MifareClassic.TYPE_CLASSIC:
-                            type = "Classic";
-                            break;
-                        case MifareClassic.TYPE_PLUS:
-                            type = "Plus";
-                            break;
-                        case MifareClassic.TYPE_PRO:
-                            type = "Pro";
-                            break;
-                    }
-                    sb.append("Mifare Classic type: ");
-                    sb.append(type);
-                    sb.append('\n');
-
-                    sb.append("Mifare size: ");
-                    sb.append(mifareTag.getSize() + " bytes");
-                    sb.append('\n');
-
-                    sb.append("Mifare sectors: ");
-                    sb.append(mifareTag.getSectorCount());
-                    sb.append('\n');
-
-                    sb.append("Mifare blocks: ");
-                    sb.append(mifareTag.getBlockCount());
-                } catch (Exception e) {
-                    sb.append("Mifare classic error: " + e.getMessage());
-                }
-            }
-
-            if (tech.equals(MifareUltralight.class.getName())) {
-                sb.append('\n');
-                MifareUltralight mifareUlTag = MifareUltralight.get(tag);
-                String type = "Unknown";
-                switch (mifareUlTag.getType()) {
-                    case MifareUltralight.TYPE_ULTRALIGHT:
-                        type = "Ultralight";
-                        break;
-                    case MifareUltralight.TYPE_ULTRALIGHT_C:
-                        type = "Ultralight C";
-                        break;
-                }
-                sb.append("Mifare Ultralight type: ");
-                sb.append(type);
-            }
-        }
-        Log.v(TAG,sb.toString());
-        return sb.toString();
+    @Override
+    protected void onPause() {
+        super.onPause();
+        writeModeOff();
     }
 
-    //For reading and writing
-//    private String detectTagData(Tag tag) {
-//        StringBuilder sb = new StringBuilder();
-//        byte[] id = tag.getId();
-//        sb.append("NFC ID (dec): ").append(toDec(id)).append('\n');
-//        for (String tech : tag.getTechList()) {
-//            if (tech.equals(MifareUltralight.class.getName())) {
-//                MifareUltralight mifareUlTag = MifareUltralight.get(tag);
-//                String payload;
-//                payload = readTag(mifareUlTag);
-//                sb.append("payload: ");
-//                sb.append(payload);
-//                writeTag(mifareUlTag);
-//            }
-//        }
-//    Log.v("test",sb.toString());
-//    return sb.toString();
-//}
-    private String toHex(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = bytes.length - 1; i >= 0; --i) {
-            int b = bytes[i] & 0xff;
-            if (b < 0x10)
-                sb.append('0');
-            sb.append(Integer.toHexString(b));
-            if (i > 0) {
-                sb.append(" ");
-            }
-        }
-        return sb.toString();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        writeModeOn();
     }
 
-    private String toReversedHex(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < bytes.length; ++i) {
-            if (i > 0) {
-                sb.append(" ");
-            }
-            int b = bytes[i] & 0xff;
-            if (b < 0x10)
-                sb.append('0');
-            sb.append(Integer.toHexString(b));
-        }
-        return sb.toString();
+    private void writeModeOn() {
+        writeMode = true;
+        nfcAdapter.enableForegroundDispatch(this, pendingIntent, writingTagFilters, null);
     }
 
-    private long toDec(byte[] bytes) {
-        long result = 0;
-        long factor = 1;
-        for (int i = 0; i < bytes.length; ++i) {
-            long value = bytes[i] & 0xffl;
-            result += value * factor;
-            factor *= 256l;
-        }
-        return result;
+    private void writeModeOff() {
+        writeMode = false;
+        nfcAdapter.disableForegroundDispatch(this);
     }
 
-    private long toReversedDec(byte[] bytes) {
-        long result = 0;
-        long factor = 1;
-        for (int i = bytes.length - 1; i >= 0; --i) {
-            long value = bytes[i] & 0xffl;
-            result += value * factor;
-            factor *= 256l;
-        }
-        return result;
-    }
-    public void writeTag(MifareUltralight mifareUlTag) {
-        try {
-            mifareUlTag.connect();
-            mifareUlTag.writePage(4, "get ".getBytes(Charset.forName("US-ASCII")));
-            mifareUlTag.writePage(5, "fast".getBytes(Charset.forName("US-ASCII")));
-            mifareUlTag.writePage(6, " NFC".getBytes(Charset.forName("US-ASCII")));
-            mifareUlTag.writePage(7, " now".getBytes(Charset.forName("US-ASCII")));
-        } catch (IOException e) {
-            Log.e(TAG, "IOException while writing MifareUltralight...", e);
-        } finally {
-            try {
-                mifareUlTag.close();
-            } catch (IOException e) {
-                Log.e(TAG, "IOException while closing MifareUltralight...", e);
-            }
-        }
-    }
-    public String readTag(MifareUltralight mifareUlTag) {
-        try {
-            mifareUlTag.connect();
-            byte[] payload = mifareUlTag.readPages(4);
-            return new String(payload, Charset.forName("US-ASCII"));
-        } catch (IOException e) {
-            Log.e(TAG, "IOException while reading MifareUltralight message...", e);
-        } finally {
-            if (mifareUlTag != null) {
-                try {
-                    mifareUlTag.close();
-                }
-                catch (IOException e) {
-                    Log.e(TAG, "Error closing tag...", e);
-                }
-            }
-        }
-        return null;
-    }
 }
