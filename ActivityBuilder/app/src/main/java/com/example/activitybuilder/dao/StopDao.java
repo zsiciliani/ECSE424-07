@@ -42,4 +42,7 @@ public interface StopDao {
     @Delete
     void delete(Stop stop);
 
+    @Query("DELETE FROM Stop WHERE stopId = :id")
+    public void deleteStopById(long id);
+
 }

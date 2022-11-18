@@ -57,4 +57,5 @@ public class ManageEvents extends AppCompatActivity implements EventRecyclerView
     public void finish(View view) {
         this.finish();
     }
+
 }

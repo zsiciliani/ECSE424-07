@@ -139,6 +139,14 @@ public class Stop {
         return stop;
     }
 
+
+    public static void deleteStopById(Context context, long stopId) {
+        AppDatabase.getInstance(context).stopDao().deleteStopById(stopId);
+        //Note: I think that because of the foreign key being set to CASCADE, deleting an Event should
+        //delete all related stops. Might need to do some testing to make sure this is what is
+        //actually happening. If not, will need to do some manual deletion here
+    }
+
     public static void deleteStop(Context context, Stop stop) {
         AppDatabase db = AppDatabase.getInstance(context);
         int stopOrderNumber = stop.orderNumber;

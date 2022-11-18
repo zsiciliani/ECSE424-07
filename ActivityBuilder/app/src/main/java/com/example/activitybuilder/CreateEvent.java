@@ -26,18 +26,27 @@ public class CreateEvent extends AppCompatActivity {
     }
 
     public void manageStops(View view) {
-        String eventName = ((TextView) this.findViewById(R.id.eventNameField)).getText().toString();
-        String date = ((TextView) this.findViewById(R.id.dateField)).getText().toString();
-        String durationValue = ((TextView) this.findViewById(R.id.durationField)).getText().toString();
-        int duration = Integer.parseInt(durationValue);
-        String startingLocation = ((TextView) this.findViewById(R.id.startingLocationField)).getText().toString();
-        String description = ((TextView) this.findViewById(R.id.descriptionField)).getText().toString();
 
-        Event event = Event.createEvent(getApplicationContext(),eventName,date,duration,startingLocation,description);
-        System.out.println("Created event with ID " + event.getEventId());
-        Intent intent = new Intent(CreateEvent.this, ManageStops.class);
-        intent.putExtra("event_id", event.getEventId());
-        startActivity(intent);
+        EditText event_name = findViewById(R.id.eventNameField);
+
+        String eventName = ((TextView) this.findViewById(R.id.eventNameField)).getText().toString();
+
+        if (eventName.length() == 0) {
+            event_name.setError("This field is required");
+        }
+        else {
+            String date = ((TextView) this.findViewById(R.id.dateField)).getText().toString();
+            String durationValue = ((TextView) this.findViewById(R.id.durationField)).getText().toString();
+            int duration = Integer.parseInt(durationValue);
+            String startingLocation = ((TextView) this.findViewById(R.id.startingLocationField)).getText().toString();
+            String description = ((TextView) this.findViewById(R.id.descriptionField)).getText().toString();
+
+            Event event = Event.createEvent(getApplicationContext(), eventName, date, duration, startingLocation, description);
+            System.out.println("Created event with ID " + event.getEventId());
+            Intent intent = new Intent(CreateEvent.this, ManageStops.class);
+            intent.putExtra("event_id", event.getEventId());
+            startActivity(intent);
+        }
     }
 
 

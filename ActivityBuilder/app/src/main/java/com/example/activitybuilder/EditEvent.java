@@ -79,6 +79,10 @@ public class EditEvent extends AppCompatActivity {
         System.out.println("About to manage stops for eventId " + eventId);
         new_intent.putExtra("event_id", eventId);
         startActivity(new_intent);
+    }
 
+    public void delete(View view){
+        Event.deleteEventById(getApplicationContext(),eventId);
+        startActivity(new Intent(EditEvent.this, MainActivity.class));
     }
 }

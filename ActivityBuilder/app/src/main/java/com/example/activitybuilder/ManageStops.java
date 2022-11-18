@@ -50,6 +50,8 @@ public class ManageStops extends AppCompatActivity implements StopRecyclerViewAd
         Intent intent = new Intent(ManageStops.this, EditStop.class);
         intent.putExtra("stop_id", adapter.getItem(position).getStopId());
         intent.putExtra("event_id", adapter.getItem(position).getStopEventId());
+        intent.putExtra("content", adapter.getItem(position).getContentUrl());
+        intent.putExtra("location", adapter.getItem(position).getLocation());
         startActivity(intent);
     }
 
@@ -63,4 +65,5 @@ public class ManageStops extends AppCompatActivity implements StopRecyclerViewAd
         System.out.println("Creating stop from manageStops for eventId " + eventId);
         startActivity(intent);
     }
+
 }
