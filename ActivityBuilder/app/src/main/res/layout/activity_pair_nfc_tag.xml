@@ -8,7 +8,7 @@
 
     <Button
         android:id="@+id/button18"
-        android:layout_width="62dp"
+        android:layout_width="70dp"
         android:layout_height="48dp"
         android:onClick="finish"
         android:text="back"
@@ -22,14 +22,30 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.01999998" />
 
+    <Button
+        android:id="@+id/btnHomeFromPair"
+        android:layout_width="70dp"
+        android:layout_height="48dp"
+        android:onClick="finish"
+        android:text="Home"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:backgroundTint="#92105083"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01999998" />
+
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="155dp"
-        android:layout_height="195dp"
+        android:layout_width="253dp"
+        android:layout_height="161dp"
         android:fontFamily="sans-serif-condensed"
-        android:text="Hold NFC tag to device to pair"
+        android:text="Hold NFC tag to device to detect; when you feel a vibration, click Pair"
         android:textAlignment="center"
-        android:textSize="34sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,5 +64,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.18" />
+
+    <Button
+        android:id="@+id/ActivateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pair"
+        app:backgroundTint="#92105083"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

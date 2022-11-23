@@ -97,7 +97,8 @@ public class Stop {
         System.out.println("Event is " + db.eventDao().findEventById(stopEventId));
         int numStops = db.stopDao().findStopsByEventId(stopEventId).size();
         stop.orderNumber = numStops + 1;
-        AppDatabase.getInstance(context).stopDao().insertStop(stop);
+        long stopId = AppDatabase.getInstance(context).stopDao().insertStop(stop);
+        stop.stopId = stopId;
         return stop;
     }
 
@@ -137,6 +138,12 @@ public class Stop {
         stop.location = location;
         AppDatabase.getInstance(context).stopDao().updateStop(stop);
         return stop;
+    }
+
+    public static void setStopToPaired(Context context, long stopId) {
+        Stop stop = AppDatabase.getInstance(context).stopDao().findStopById(stopId);
+        stop.setPaired(true);
+        AppDatabase.getInstance(context).stopDao().updateStop(stop);
     }
 
 

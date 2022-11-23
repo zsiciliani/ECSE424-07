@@ -22,4 +22,8 @@ public class UnsuccessfulPair extends AppCompatActivity {
         startActivity(new Intent(UnsuccessfulPair.this, CreateStop.class));
     }
 
+    public void returnHome(View view) {
+        startActivity(new Intent(UnsuccessfulPair.this, MainActivity.class));
+    }
+
 }

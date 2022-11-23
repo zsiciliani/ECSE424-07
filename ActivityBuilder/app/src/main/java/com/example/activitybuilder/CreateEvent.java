@@ -25,6 +25,10 @@ public class CreateEvent extends AppCompatActivity {
         this.finish();
     }
 
+    public void returnHome(View view) {
+        startActivity(new Intent(CreateEvent.this, MainActivity.class));
+    }
+
     public void manageStops(View view) {
 
         EditText event_name = findViewById(R.id.eventNameField);
@@ -37,7 +41,12 @@ public class CreateEvent extends AppCompatActivity {
         else {
             String date = ((TextView) this.findViewById(R.id.dateField)).getText().toString();
             String durationValue = ((TextView) this.findViewById(R.id.durationField)).getText().toString();
-            int duration = Integer.parseInt(durationValue);
+            int duration;
+            try {
+                duration = Integer.parseInt(durationValue);
+            } catch(Exception e) {
+                duration = 0;
+            }
             String startingLocation = ((TextView) this.findViewById(R.id.startingLocationField)).getText().toString();
             String description = ((TextView) this.findViewById(R.id.descriptionField)).getText().toString();
 

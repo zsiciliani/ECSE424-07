@@ -1,7 +1,9 @@
 package com.example.activitybuilder;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.activitybuilder.model.Event;
+import com.example.activitybuilder.model.Stop;
 
 public class EditEvent extends AppCompatActivity {
     long eventId;
@@ -82,7 +85,30 @@ public class EditEvent extends AppCompatActivity {
     }
 
     public void delete(View view){
-        Event.deleteEventById(getApplicationContext(),eventId);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle("Delete Stop?");
+        builder.setMessage("Are you sure you would like to delete this stop?");
+        builder.setPositiveButton("Confirm",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Event.deleteEventById(getApplicationContext(),eventId);
+                        startActivity(new Intent(EditEvent.this, MainActivity.class));
+                    }
+                });
+        builder.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void returnHome(View view) {
         startActivity(new Intent(EditEvent.this, MainActivity.class));
     }
 }
