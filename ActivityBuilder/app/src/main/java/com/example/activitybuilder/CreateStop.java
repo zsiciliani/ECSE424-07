@@ -1,13 +1,16 @@
 package com.example.activitybuilder;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.activitybuilder.model.Event;
 import com.example.activitybuilder.model.Stop;
 
 public class CreateStop extends AppCompatActivity {
@@ -63,6 +66,24 @@ public class CreateStop extends AppCompatActivity {
             startActivity(intent);
         }
 
-
     }
+
+
+    public void information(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setMessage("Pair this stop with an NFC tag to add the content URL that will be used at this stop.");
+        builder.setPositiveButton("Okay",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Event.deleteEventById(getApplicationContext(),eventId);
+                        startActivity(new Intent(CreateStop.this, CreateStop.class));
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 }

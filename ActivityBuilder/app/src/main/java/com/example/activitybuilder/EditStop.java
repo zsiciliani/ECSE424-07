@@ -82,4 +82,21 @@ public class EditStop extends AppCompatActivity {
     public void returnHome(View view) {
         startActivity(new Intent(EditStop.this, MainActivity.class));
     }
+
+    public void information(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setMessage("Pair this stop with an NFC tag to add the content URL that will be used at this stop.");
+        builder.setPositiveButton("Okay",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Event.deleteEventById(getApplicationContext(),eventId);
+                        startActivity(new Intent(EditStop.this, EditStop.class));
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }

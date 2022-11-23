@@ -49,7 +49,7 @@ public class EditEvent extends AppCompatActivity {
     }
 
     public void finish(View view) {
-        this.finish();
+        startActivity(new Intent(EditEvent.this, ManageEvents.class));
     }
 
     public void save(View view){
@@ -111,4 +111,22 @@ public class EditEvent extends AppCompatActivity {
     public void returnHome(View view) {
         startActivity(new Intent(EditEvent.this, MainActivity.class));
     }
+
+    public void information(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setMessage("Would you like to create your stops now?");
+        builder.setPositiveButton("Okay",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Event.deleteEventById(getApplicationContext(),eventId);
+                        startActivity(new Intent(EditEvent.this, EditEvent.class));
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 }

@@ -1,15 +1,18 @@
 package com.example.activitybuilder;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.activitybuilder.model.Event;
 import com.example.activitybuilder.model.Stop;
 
 
@@ -68,6 +71,23 @@ public class ManageStops extends AppCompatActivity implements StopRecyclerViewAd
 
     public void returnHome(View view) {
         startActivity(new Intent(ManageStops.this, MainActivity.class));
+    }
+
+    public void noPair(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setMessage("You have not paired this stop to an NFC tag!");
+        builder.setPositiveButton("Okay",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Event.deleteEventById(getApplicationContext(),eventId);
+                        startActivity(new Intent(ManageStops.this, ManageStops.class));
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 }
