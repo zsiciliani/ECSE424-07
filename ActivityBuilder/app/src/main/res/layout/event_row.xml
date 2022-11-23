@@ -16,22 +16,23 @@
         android:textSize="20sp" />
 
     <Button
+        android:id="@+id/btnCloneEventRow"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginHorizontal="10px"
-        android:layout_weight="0"
+        android:layout_weight="1"
         android:text="Clone"
         android:textSize="10dp"
         app:backgroundTint="#92105083" />
 
     <Button
+        android:id="@+id/btnDeleteEventRow"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_weight="0"
+        android:layout_weight="1"
         android:text="Delete"
-        android:onClick="delete"
         android:textSize="10dp"
         app:backgroundTint="#92105083" />
 
