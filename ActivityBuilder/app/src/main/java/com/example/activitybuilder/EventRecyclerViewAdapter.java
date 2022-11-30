@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.activitybuilder.model.Event;
@@ -35,7 +36,7 @@ public class EventRecyclerViewAdapter extends RecyclerView.Adapter<EventRecycler
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String eventName = mData.get(position).getName();
-        holder.myTextView.setText(eventName);
+        holder.textView.setText(eventName);
     }
 
     // total number of rows
@@ -47,17 +48,34 @@ public class EventRecyclerViewAdapter extends RecyclerView.Adapter<EventRecycler
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myTextView;
+        TextView textView;
+        Button cloneButton;
+        Button deleteButton;
 
         ViewHolder(View itemView) {
             super(itemView);
-            myTextView = itemView.findViewById(R.id.tvEventRow);
+            textView = itemView.findViewById(R.id.tvEventRow);
+            cloneButton = itemView.findViewById(R.id.btnCloneEventRow);
+            deleteButton = itemView.findViewById(R.id.btnDeleteEventRow);
             itemView.setOnClickListener(this);
+            textView.setOnClickListener(this);
+            cloneButton.setOnClickListener(this);
+            deleteButton.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            System.out.println("On click was called for view with id " + view.getId());
+            if (view.getId() == textView.getId()) {
+                System.out.println("Calling onClick for textView");
+                if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            } else if (view.getId() == cloneButton.getId()) {
+                System.out.println("Calling onClick for cloneButton");
+                //TODO if (mClickListener != null) mClickListener.clone(view, getAdapterPosition());
+            } else if (view.getId() == deleteButton.getId()) {
+                System.out.println("Calling onClick for deleteButton");
+                if (mClickListener != null) mClickListener.delete(view, getAdapterPosition());
+            }
         }
     }
 
@@ -74,5 +92,7 @@ public class EventRecyclerViewAdapter extends RecyclerView.Adapter<EventRecycler
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
+
+        void delete(View view, int adapterPosition);
     }
 }

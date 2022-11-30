@@ -77,8 +77,7 @@ public class CreateStop extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Event.deleteEventById(getApplicationContext(),eventId);
-                        startActivity(new Intent(CreateStop.this, CreateStop.class));
+                        dialogInterface.dismiss();
                     }
                 });
 

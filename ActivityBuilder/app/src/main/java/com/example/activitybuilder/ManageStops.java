@@ -83,21 +83,4 @@ public class ManageStops extends AppCompatActivity implements StopRecyclerViewAd
         startActivity(new Intent(ManageStops.this, MainActivity.class));
     }
 
-    public void noPair(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setMessage("You have not paired this stop to an NFC tag!");
-        builder.setPositiveButton("Okay",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Event.deleteEventById(getApplicationContext(),eventId);
-                        startActivity(new Intent(ManageStops.this, ManageStops.class));
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
 }

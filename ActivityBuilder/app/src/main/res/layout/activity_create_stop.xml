@@ -76,8 +76,8 @@
 
     <Button
         android:id="@+id/button13"
-        android:layout_width="62dp"
-        android:layout_height="41dp"
+        android:layout_width="64dp"
+        android:layout_height="48dp"
         android:text="back"
         android:onClick="finish"
         android:textSize="10sp"
@@ -92,7 +92,7 @@
 
     <Button
         android:id="@+id/btnHomeFromCreateStop"
-        android:layout_width="70dp"
+        android:layout_width="64dp"
         android:layout_height="48dp"
         android:onClick="returnHome"
         android:text="Home"
