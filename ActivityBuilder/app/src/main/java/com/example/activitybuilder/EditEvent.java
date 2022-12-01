@@ -87,8 +87,8 @@ public class EditEvent extends AppCompatActivity {
     public void delete(View view){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
-        builder.setTitle("Delete Stop?");
-        builder.setMessage("Are you sure you would like to delete this stop?");
+        builder.setTitle("Delete Event?");
+        builder.setMessage("Are you sure you would like to delete this event?");
         builder.setPositiveButton("Confirm",
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -120,8 +120,7 @@ public class EditEvent extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Event.deleteEventById(getApplicationContext(),eventId);
-                        startActivity(new Intent(EditEvent.this, EditEvent.class));
+                        dialogInterface.dismiss();
                     }
                 });
 

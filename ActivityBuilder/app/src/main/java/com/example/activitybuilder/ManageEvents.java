@@ -54,6 +54,11 @@ public class ManageEvents extends AppCompatActivity implements EventRecyclerView
         startActivity(intent);
     }
 
+    @Override
+    public void delete(View view, int adapterPosition) {
+
+    }
+
     public void finish(View view) {
         startActivity(new Intent(ManageEvents.this, MainActivity.class));;
     }

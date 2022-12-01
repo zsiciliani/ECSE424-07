@@ -43,7 +43,10 @@ public class EditStop extends AppCompatActivity {
     }
 
     public void pairNFC(View view) {
-        startActivity(new Intent(EditStop.this, PairNfcTag.class));
+        Intent intent = new Intent(EditStop.this, PairNfcTag.class);
+        intent.putExtra("stop_content", contentUrl);
+        intent.putExtra("stop_id", stopId);
+        startActivity(intent);
     }
 
     public void save(View view){
@@ -91,8 +94,9 @@ public class EditStop extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Event.deleteEventById(getApplicationContext(),eventId);
-                        startActivity(new Intent(EditStop.this, EditStop.class));
+                        //Event.deleteEventById(getApplicationContext(),eventId);
+                        // startActivity(new Intent(EditStop.this, EditStop.class));
+                        dialogInterface.dismiss();
                     }
                 });
 

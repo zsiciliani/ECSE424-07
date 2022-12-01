@@ -8,16 +8,23 @@
     android:padding="10dp"
     android:layout_marginTop="10dp">
 
+    <ImageButton
+        android:background="@mipmap/warning_foreground"
+        android:id="@+id/noPairWarning"
+        android:layout_width="25dp"
+        android:layout_height="45dp"
+        android:layout_weight="0.3" />
+
     <TextView
-        android:id="@+id/tvEventRow"
+        android:id="@+id/tvStopRow"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_weight="3"
+        android:layout_weight="2.7"
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/btnCloneEventRow"
+        android:id="@+id/btnCloneStopRow"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
@@ -30,7 +37,7 @@
         app:backgroundTint="#92105083" />
 
     <Button
-        android:id="@+id/btnDeleteEventRow"
+        android:id="@+id/btnDeleteStopRow"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
