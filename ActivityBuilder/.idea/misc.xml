@@ -11,7 +11,7 @@
         <entry key="app/src/main/res/layout/activity_edit_stop.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_help.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_manage_events.xml" value="0.25833333333333336" />
+        <entry key="app/src/main/res/layout/activity_manage_events.xml" value="0.24010416666666667" />
         <entry key="app/src/main/res/layout/activity_manage_stops.xml" value="0.28802083333333334" />
         <entry key="app/src/main/res/layout/activity_pair_nfc_tag.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layout/activity_successful_pair.xml" value="0.25833333333333336" />
@@ -34,7 +34,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_14_PREVIEW" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
