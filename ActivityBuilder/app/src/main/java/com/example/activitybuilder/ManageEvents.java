@@ -57,6 +57,14 @@ public class ManageEvents extends AppCompatActivity implements EventRecyclerView
     }
 
     @Override
+    public void clone(View view, int position) {
+        Event event = adapter.getItem(position);
+        Event.cloneEvent(this, event);
+        finish();
+        startActivity(getIntent());
+    }
+
+    @Override
     public void delete(View view, int adapterPosition) {
         eventId = adapter.getItem(adapterPosition).getEventId();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

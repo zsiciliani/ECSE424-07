@@ -71,7 +71,7 @@ public class EventRecyclerViewAdapter extends RecyclerView.Adapter<EventRecycler
                 if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
             } else if (view.getId() == cloneButton.getId()) {
                 System.out.println("Calling onClick for cloneButton");
-                //TODO if (mClickListener != null) mClickListener.clone(view, getAdapterPosition());
+                if (mClickListener != null) mClickListener.clone(view, getAdapterPosition());
             } else if (view.getId() == deleteButton.getId()) {
                 System.out.println("Calling onClick for deleteButton");
                 if (mClickListener != null) mClickListener.delete(view, getAdapterPosition());
@@ -92,7 +92,7 @@ public class EventRecyclerViewAdapter extends RecyclerView.Adapter<EventRecycler
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
-
+        void clone (View view, int position);
         void delete(View view, int adapterPosition);
     }
 }

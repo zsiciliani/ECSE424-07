@@ -143,5 +143,23 @@ public class Event {
         return event;
     }
 
+    public static void cloneEvent(Context context, Event event) {
+        AppDatabase db = AppDatabase.getInstance(context);
+        List<Stop> stops = db.stopDao().findStopsByEventId(event.eventId);
+        Event clonedEvent = new Event();
+        clonedEvent.name = event.name + " (clone)";
+        clonedEvent.date = event.date;
+        clonedEvent.duration = event.duration;
+        clonedEvent.startingLocation = event.startingLocation;
+        clonedEvent.description = event.description;
+        long clonedEventId = db.eventDao().insertEvent(clonedEvent);
+        for (Stop s : stops) {
+            Stop clonedStop = new Stop(clonedEventId, s.getContentUrl(), s.getLocation());
+            clonedStop.setPaired(false);
+            clonedStop.setOrderNumber(s.getOrderNumber());
+            db.stopDao().insertStop(clonedStop);
+        }
+    }
+
 }
 
