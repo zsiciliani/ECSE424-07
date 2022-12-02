@@ -1,9 +1,11 @@
 package com.example.activitybuilder;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +20,7 @@ import java.util.List;
 public class ManageEvents extends AppCompatActivity implements EventRecyclerViewAdapter.ItemClickListener {
 
     EventRecyclerViewAdapter adapter;
-
+    long eventId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +58,28 @@ public class ManageEvents extends AppCompatActivity implements EventRecyclerView
 
     @Override
     public void delete(View view, int adapterPosition) {
-
+        eventId = adapter.getItem(adapterPosition).getEventId();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle("Delete Event?");
+        builder.setMessage("Are you sure you would like to delete this event?");
+        builder.setPositiveButton("Confirm",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Event.deleteEventById(getApplicationContext(),eventId);
+                        startActivity(new Intent(ManageEvents.this, ManageEvents.class));
+                    }
+                });
+        builder.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public void finish(View view) {

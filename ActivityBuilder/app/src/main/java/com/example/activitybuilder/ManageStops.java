@@ -20,6 +20,7 @@ import java.util.List;
 
 public class ManageStops extends AppCompatActivity implements StopRecyclerViewAdapter.ItemClickListener {
     long eventId;
+    long stopId;
     StopRecyclerViewAdapter adapter;
 
     @Override
@@ -60,7 +61,28 @@ public class ManageStops extends AppCompatActivity implements StopRecyclerViewAd
 
     @Override
     public void delete(View view, int position) {
-        System.out.println("You called the delete method for Stop with ID " + adapter.getItem(position).getStopId());
+        stopId = adapter.getItem(position).getStopId();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle("Delete Stop?");
+        builder.setMessage("Are you sure you would like to delete this stop?");
+        builder.setPositiveButton("Confirm",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Stop.deleteStopById(getApplicationContext(),stopId);
+                        startActivity(new Intent(ManageStops.this, ManageStops.class));
+                    }
+                });
+        builder.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override

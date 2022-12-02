@@ -3,7 +3,10 @@
     package="com.example.activitybuilder">
 
     <uses-permission android:name="android.permission.NFC" />
-    <uses-feature android:name="android.hardware.nfc" android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
 
     <application
         android:name=".ActivityBuilderApplication"
@@ -33,11 +36,13 @@
             android:exported="false" />
         <activity
             android:name=".PairNfcTag"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED"></action>
-                <category android:name="android.intent.category.DEFAULT"></category>
-                <data android:mimeType="text/plain"></data>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
         <activity
