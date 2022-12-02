@@ -171,4 +171,8 @@ public class Stop {
         //method to delete a list
         db.stopDao().updateStops((Stop[]) otherStops.toArray());
     }
+
+    public static void cloneStop(Context context, Stop stop) {
+        createStop(context, stop.getStopEventId(), stop.getContentUrl(), stop.getLocation());
+    }
 }

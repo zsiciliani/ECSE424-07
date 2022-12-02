@@ -88,6 +88,9 @@ public class ManageStops extends AppCompatActivity implements StopRecyclerViewAd
     @Override
     public void clone(View view, int position) {
         System.out.println("You called the clone method for Stop with ID " + adapter.getItem(position).getStopId());
+        Stop.cloneStop(this, adapter.getItem(position));
+        finish();
+        startActivity(getIntent());
     }
 
     public void finish(View view) {
