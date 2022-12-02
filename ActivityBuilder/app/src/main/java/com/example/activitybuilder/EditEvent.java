@@ -115,7 +115,7 @@ public class EditEvent extends AppCompatActivity {
     public void information(View view){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
-        builder.setMessage("Would you like to create your stops now?");
+        builder.setMessage("Create one stop per location where you would like to place an NFC tag.");
         builder.setPositiveButton("Okay",
                 new DialogInterface.OnClickListener() {
                     @Override
